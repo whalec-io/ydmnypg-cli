@@ -1,0 +1,25 @@
+const handler = async function (request, response, next) {
+  const { id } = request.params;
+
+  const ERROR = this.constants('Error');
+  const $<%= modelName.upper %> = this.model('<%= modelName.camel %>');
+
+  return $<%= modelName.upper %>.withTransaction(async (connection) => {
+    const res = await $<%= modelName.upper %>.getItem(id);
+    if (!res) throw this.createError(ERROR.NOT_FOUND, { statusCode: 404 });
+
+    await $<%= modelName.upper %>.delete(id);
+    return { id: Number(id) };
+  });
+};
+
+export default {
+  method: 'delete',
+  path: '/<%= modelName.path %>/:id',
+  permissions: ['token'],
+  params: [
+    { name: 'id', type: 'integer', description: 'Item ID' },
+  ],
+  description: 'Delete a <%= modelName.camel %>',
+  controllers: [handler],
+};

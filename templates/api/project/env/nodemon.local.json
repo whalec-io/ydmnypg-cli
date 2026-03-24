@@ -1,0 +1,8 @@
+{
+  "env": {
+    "YS_API_MODE": "local",
+    "DEBUG": "ydmnypg:application:debug ydmnypg:config:debug ydmnypg:app-context:debug ydmnypg:controller:debug ydmnypg:jwt:debug ydmnypg:model:debug ydmnypg:param-validator:debug ydmnypg:scheduler:debug ydmnypg:service:debug ydmnypg:swagger:debug dao:mysql:debug dao:postgresql:debug"
+  },
+  "watch": ["bin", "data", "models", "services"],
+  "ext": "js,json,xml"
+}

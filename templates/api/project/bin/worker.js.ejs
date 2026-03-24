@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+import Core from '@ydmnypg/core';
+import config from '../data/config/config.js';
+
+const app = new Core.Application({
+  config,
+  path: '/',
+  target: '<%= target %>',
+  prefix: '<%= prefix %>',
+  title: '<%= projectName.upper %>',
+  createDoc: process.env.YS_API_MODE !== 'production',
+  initMode: process.env.YS_API_MODE === 'local',
+  useScheduler: process.env.DISABLE_SCHEDULER !== 'true',
+  useCookie: true,
+  useProxy: true,
+});
+
+app.run().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

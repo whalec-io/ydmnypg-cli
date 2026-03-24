@@ -1,0 +1,17 @@
+{
+  "name": "<%= projectName.lower %>",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "yp-cli",
+    "start": "node ./bin/worker.js",
+    "start:local": "nodemon --config ./env/nodemon.debug.json ./bin/worker.js",
+    "start:dev": "nodemon --config ./env/nodemon.dev.json ./bin/worker.js",
+    "start:staging": "nodemon --config ./env/nodemon.staging.json ./bin/worker.js",
+    "start:prod": "nodemon --config ./env/nodemon.prod.json ./bin/worker.js",
+    "process": "pm2 restart env/process.json"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

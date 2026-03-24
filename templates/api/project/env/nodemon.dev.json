@@ -1,0 +1,8 @@
+{
+  "env": {
+    "YS_API_MODE": "dev",
+    "DEBUG": "ydmnypg:application:info ydmnypg:config:info ydmnypg:app-context:info ydmnypg:controller:info ydmnypg:jwt:info ydmnypg:model:info ydmnypg:param-validator:info ydmnypg:scheduler:info ydmnypg:service:info ydmnypg:swagger:info dao:mysql:info dao:postgresql:info"
+  },
+  "watch": ["bin", "data", "models", "services"],
+  "ext": "js,json,xml"
+}

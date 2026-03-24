@@ -1,0 +1,27 @@
+{
+  "name": "@ydmnypg/cli",
+  "version": "0.4.1",
+  "description": "Code generator and project scaffolding tool for the ydmnypg framework",
+  "type": "module",
+  "author": {
+    "email": "pgkang@studioys.kr",
+    "name": "eden.kang"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whalec-io/ydmnypg-cli.git"
+  },
+  "license": "MIT",
+  "main": "bin/ys-cli",
+  "bin": {
+    "ys-cli": "bin/ys-cli"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^8.3.2",
+    "commander": "^14.0.3",
+    "glob": "^13.0.6"
+  },
+  "devDependencies": {
+    "prettier": "^3.8.1"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "host": {
+    "<%= target %>": "https://<%= target %>.<%= domain %>",
+    "web": "https://www.<%= domain %>"
+  },
+  "port": {
+    "<%= target %>": <%= port %>
+  },
+  "swagger": {
+    "template": "api-doc.html",
+    "schemes": ["https"]
+  },
+  "jwt": {
+    "tokenSecret": "<%= tokenSecret.production %>",
+    "tokenAlgorithm": "HS256",
+    "expiresTokenIn": 6048000,
+    "refreshTokenIn": 172800
+  },
+  "database": {
+    "mysql": {
+      "host": "",
+      "port": 3306,
+      "user": "",
+      "password": "",
+      "database": ""
+    }
+  }
+}

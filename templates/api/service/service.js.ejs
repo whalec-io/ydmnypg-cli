@@ -1,0 +1,14 @@
+import { fileURLToPath } from 'url';
+import Core from '@ydmnypg/core';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+
+const service = new Core.Service('<%= serviceName.lower %>', {
+  type: 'api',
+  dir: __dirname,
+  interfaceVersion: "v1",
+  path: "/",
+  scopes: ['api', 'admin'],
+});
+
+export default service;

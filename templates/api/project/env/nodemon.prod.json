@@ -1,0 +1,8 @@
+{
+  "env": {
+    "YS_API_MODE": "production",
+    "DEBUG": "ydmnypg:application:error ydmnypg:config:error ydmnypg:app-context:error ydmnypg:controller:error ydmnypg:jwt:error ydmnypg:model:error ydmnypg:param-validator:error ydmnypg:scheduler:error ydmnypg:service:error ydmnypg:swagger:error dao:mysql:error dao:postgresql:error"
+  },
+  "watch": ["bin", "data", "models", "services"],
+  "ext": "js,json,xml"
+}

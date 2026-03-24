@@ -1,0 +1,30 @@
+const handler = async function (request, response, next) {
+  const body = request.body;
+
+  const ERROR = this.constants('Error');
+  const $<%= modelName.upper %> = this.model('<%= modelName.camel %>');
+
+  return $<%= modelName.upper %>.withTransaction(async (connection) => {
+    let res = await $<%= modelName.upper %>.create({
+      // TODO: fill in fields from body
+    });
+
+    if (!res) throw this.createError(ERROR.OPERATION_FAILED, { statusCode: 500 });
+
+    res = await $<%= modelName.upper %>.getItem(res.insertId);
+    if (!res) throw this.createError(ERROR.NOT_FOUND, { statusCode: 404 });
+
+    return $<%= modelName.upper %>.mapData(res);
+  });
+};
+
+export default {
+  method: 'post',
+  path: '/<%= modelName.path %>',
+  permissions: ['token'],
+  params: [
+    // TODO: add params
+  ],
+  description: 'Create a <%= modelName.camel %>',
+  controllers: [handler],
+};

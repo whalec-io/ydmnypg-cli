@@ -1,0 +1,70 @@
+#!/usr/bin/env node
+
+import { program } from "commander";
+import { createRequire } from "module";
+
+import ApiBuilder from "../lib/builders/api-builder.js";
+import AdminBuilder from "../lib/builders/admin-builder.js";
+
+const require = createRequire(import.meta.url);
+const pkg = require("../package.json");
+
+program.name("ys-cli").description("YS framework code generator").version(pkg.version);
+
+// ── api ──────────────────────────────────────────────────────────────────────
+
+const api = program.command("api").description("Generate API project resources");
+
+api
+  .command("project")
+  .description("Scaffold a new API project")
+  .action(() => new ApiBuilder().generateProject().catch(die));
+
+api
+  .command("service")
+  .description("Generate a service (controller + service file)")
+  .action(() => new ApiBuilder().generateService().catch(die));
+
+api
+  .command("model")
+  .description("Generate a model")
+  .action(() => new ApiBuilder().generateModel().catch(die));
+
+api
+  .command("crud")
+  .description("Generate CRUD handler files for a model")
+  .action(() => new ApiBuilder().generateCRUD().catch(die));
+
+api
+  .command("handler")
+  .description("Generate a single handler file")
+  .action(() => new ApiBuilder().generateHandler().catch(die));
+
+const admin = program.command("admin").description("Generate Admin project resources");
+
+admin
+  .command("project")
+  .description("Scaffold a new Admin project")
+  .action(() => new AdminBuilder().generateProject().catch(die));
+
+admin
+  .command("service")
+  .description("Generate a service")
+  .action(() => new AdminBuilder().generateService().catch(die));
+
+admin
+  .command("model")
+  .description("Generate a model")
+  .action(() => new AdminBuilder().generateModel().catch(die));
+
+admin
+  .command("crud")
+  .description("Generate CRUD handler files for a model")
+  .action(() => new AdminBuilder().generateCRUD().catch(die));
+
+program.parse(process.argv);
+
+function die(err) {
+  console.error(err.message || err);
+  process.exit(1);
+}

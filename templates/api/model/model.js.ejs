@@ -1,0 +1,69 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+import Core from '@ydmnypg/core';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+
+class <%= modelName.camel %>Model extends Core.Model {
+  get design() {
+    return {
+      type: '<%= connectionType %>',
+      dbConnection: '<%= connectionName %>',
+      mappers: [path.join(__dirname, 'mappers/<%= modelName.namespace %>.xml')],
+      schema: {
+        name: `${Core.Model.prefix}_<%= modelName.lower %>`,
+        mappingName: 'TABLE_<%= modelName.upper %>',
+        default: true,
+        attributes: {
+          id: { type: 'int', length: 11, autoIncrement: true, primaryKey: true },
+          created_at: { type: 'datetime', notNull: true, defaultValue: 'CURRENT_TIMESTAMP' },
+          updated_at: { type: 'datetime', notNull: true, defaultOnUpdate: true },
+        },
+        constraints: {},
+        records: [],
+      },
+    };
+  }
+
+  mapData(row, options = {}, type = "default") {
+    return this.filterData(row, { excludes: [], ...options });
+  }
+
+  mapItems(rows, options = {}, type = "default") {
+    if (!rows?.length) return [];
+    return rows.map((row) => this.mapData(row, options, type));
+  }
+
+  async create(data) {
+    return this.defaultTable().insert(data, this.connection);
+  }
+
+  async update(data, id) {
+    return this.defaultTable().update(data, { id }, this.connection);
+  }
+
+  async delete(id) {
+    return this.defaultTable().delete({ id }, this.connection);
+  }
+
+  async getItem(id, options = {}) {
+    const res = await this.defaultTable().execute('<%= modelName.namespace %>.findOne', { id, ...options }, this.connection);
+    return this.findOne(res);
+  }
+
+  async findBy(options = {}) {
+    const res = await this.defaultTable().execute('<%= modelName.namespace %>.findOne', options, this.connection);
+    return this.findOne(res);
+  }
+
+  async getItems(options = {}) {
+    return this.defaultTable().execute('<%= modelName.namespace %>.findAll', options, this.connection);
+  }
+
+  async count(options = {}) {
+    const res = await this.defaultTable().execute('<%= modelName.namespace %>.count', options, this.connection);
+    return this.getTotal(res);
+  }
+}
+
+export default <%= modelName.camel %>Model;

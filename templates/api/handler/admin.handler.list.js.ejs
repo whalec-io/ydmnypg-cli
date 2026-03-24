@@ -1,0 +1,30 @@
+const handler = async function (request, response, next) {
+  const { page = 1, size = 20 } = request.query;
+
+  const ERROR = this.constants('Error');
+  const $<%= modelName.upper %> = this.model('<%= modelName.camel %>');
+
+  return $<%= modelName.upper %>.withDb(async (connection) => {
+    const offset = (Number(page) - 1) * Number(size);
+    const options = {};
+
+    const [items, total] = await Promise.all([
+      $<%= modelName.upper %>.getItems({ page: offset, size: Number(size), ...options }),
+      $<%= modelName.upper %>.count(options),
+    ]);
+
+    return { items: $<%= modelName.upper %>.mapItems(items), total };
+  });
+};
+
+export default {
+  method: 'get',
+  path: '/<%= modelName.path %>',
+  permissions: ['admin'],
+  params: [
+    { name: 'page', type: 'integer', description: 'Page number', optional: true },
+    { name: 'size', type: 'integer', description: 'Page size', optional: true },
+  ],
+  description: '[Admin] List <%= modelName.camel %> items',
+  controllers: [handler],
+};

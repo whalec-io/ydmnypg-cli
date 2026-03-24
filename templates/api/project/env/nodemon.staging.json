@@ -1,0 +1,8 @@
+{
+  "env": {
+    "YS_API_MODE": "staging",
+    "DEBUG": "ydmnypg:application:warn ydmnypg:config:warn ydmnypg:app-context:warn ydmnypg:controller:warn ydmnypg:jwt:warn ydmnypg:model:warn ydmnypg:param-validator:warn ydmnypg:scheduler:warn ydmnypg:service:warn ydmnypg:swagger:warn dao:mysql:warn dao:postgresql:warn"
+  },
+  "watch": ["bin", "data", "models", "services"],
+  "ext": "js,json,xml"
+}

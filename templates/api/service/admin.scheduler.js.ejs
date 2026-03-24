@@ -1,0 +1,18 @@
+import { fileURLToPath } from 'url';
+import Core from '@ydmnypg/core';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+
+class Admin<%= serviceName.camel %>Scheduler extends Core.Scheduler {
+  constructor(service) {
+    super({ service });
+    this.scopes = ['admin'];
+    this.tags = ['<%= serviceName.lower %>'];
+  }
+
+  static jobs() {
+    return this.autoLoad(__dirname, { excludes: [] });
+  }
+}
+
+export default Admin<%= serviceName.camel %>Scheduler;

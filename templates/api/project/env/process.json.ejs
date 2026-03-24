@@ -1,0 +1,26 @@
+{
+  "apps": [
+    {
+      "name": "<%= projectName.lower %>",
+      "script": "./bin/worker.js",
+      "watch": true,
+      "ignore_watch": ["public", "node_modules"],
+      "env": {
+        "YS_API_MODE": "debug",
+        "DEBUG": "motif:process:info,motif:controller:info,motif:model:warn,motif:scheduler:info,dao:mysql:error,dao:mongo:error"
+      },
+      "env_development": {
+        "YS_API_MODE": "development",
+        "DEBUG": "motif:process:info,motif:controller:info,motif:model:warn,motif:scheduler:info,dao:mysql:error,dao:mongo:error"
+      },
+      "env_staging": {
+        "YS_API_MODE": "staging",
+        "DEBUG": "motif:process:info,motif:controller:info,motif:model:warn,motif:scheduler:info,dao:mysql:error,dao:mongo:error"
+      },
+      "env_production": {
+        "YS_API_MODE": "production",
+        "DEBUG": ""
+      }
+    }
+  ]
+}

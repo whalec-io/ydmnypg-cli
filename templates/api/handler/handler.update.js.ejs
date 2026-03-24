@@ -1,0 +1,30 @@
+const handler = async function (request, response, next) {
+  const { id } = request.params;
+  const body = request.body;
+
+  const ERROR = this.constants('Error');
+  const $<%= modelName.upper %> = this.model('<%= modelName.camel %>');
+
+  return $<%= modelName.upper %>.withTransaction(async (connection) => {
+    let res = await $<%= modelName.upper %>.getItem(id);
+    if (!res) throw this.createError(ERROR.NOT_FOUND, { statusCode: 404 });
+
+    res = await $<%= modelName.upper %>.update(body, id);
+    if (!res) throw this.createError(ERROR.OPERATION_FAILED, { statusCode: 500 });
+
+    res = await $<%= modelName.upper %>.getItem(id);
+    return $<%= modelName.upper %>.mapData(res);
+  });
+};
+
+export default {
+  method: 'put',
+  path: '/<%= modelName.path %>/:id',
+  permissions: ['token'],
+  params: [
+    { name: 'id', type: 'integer', description: 'Item ID' },
+    // TODO: add update fields
+  ],
+  description: 'Update a <%= modelName.camel %>',
+  controllers: [handler],
+};
