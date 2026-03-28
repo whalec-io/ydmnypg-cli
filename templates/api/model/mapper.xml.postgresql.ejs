@@ -31,11 +31,7 @@
     FROM <include refid="from"/>
     WHERE <include refid="where"/>
     <include refid="orderBy"/>
-<% if (connectionType === 'postgresql') { %>
     <if test="page != null and size != null">LIMIT ${size} OFFSET ${page}</if>
-<% } else { %>
-    <if test="page != null and size != null">LIMIT ${page}, ${size}</if>
-<% } %>
   </select>
 
   <select id="count">
