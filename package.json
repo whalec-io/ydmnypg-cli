@@ -1,6 +1,6 @@
 {
   "name": "@ydmnypg/cli",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Code generator and project scaffolding tool for the ydmnypg framework",
   "type": "module",
   "author": {
