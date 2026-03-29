@@ -1,0 +1,12 @@
+import Core from '@ydmnypg/core';
+
+class PassportModel extends Core.Model {
+  get design() {
+    return {
+      type: '<%= connectionType %>',
+      dbConnection: '<%= connectionName %>',
+    };
+  }
+}
+
+export default PassportModel;

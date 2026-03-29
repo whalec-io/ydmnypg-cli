@@ -3,9 +3,10 @@ const handler = async function (request, response, next) {
   const body = request.body;
 
   const ERROR = this.constants('Error');
+  const $PASSPORT = this.model('Passport');
   const $<%= modelName.upper %> = this.model('<%= modelName.camel %>');
 
-  return $<%= modelName.upper %>.withTransaction(async (connection) => {
+  return $PASSPORT.withTransaction([$<%= modelName.upper %>], async (connection) => {
     let res = await $<%= modelName.upper %>.getItem(id);
     if (!res) throw this.createError(ERROR.NOT_FOUND, { statusCode: 404 });
 
